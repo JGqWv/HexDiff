@@ -1,0 +1,14 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@* Importing file for comparring *@
+<h1>Hex File Comparison Tool</h1>
+<form asp-action="Compare" method="post" enctype="multipart/form-data">
+    <input type="file" name="file1" required />
+    <input type="file" name="file2" required />
+    <button type="submit">Compare</button>
+</form>
+

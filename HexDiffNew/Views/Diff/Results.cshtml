@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@* Result of compared file *@
+@model List<HexDifference>
+<h1>Differences Found</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Offset</th>
+            <th>File 1 Byte</th>
+            <th>File 2 Byte</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diff in Model)
+        {
+            <tr>
+                <td>@($"0x{@diff.Offset:X4}")</td>
+                <td>@($"0x{@diff.File1Byte:X2}")</td>
+                <td>@($"0x{@diff.File2Byte:X2}")</td>
+            </tr>
+        }
+    </tbody>
+</table>
