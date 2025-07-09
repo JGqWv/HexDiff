@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*Opened file in hex format*@
+@model HexFileModel
+<h1>opened hex file</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Addr</th>
+            <th>val</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.HexDataCollection is not null)
+            @foreach (var hex in Model.HexDataCollection)
+            {
+                <tr>
+                    <td>@($"0x{hex.Addr:X4}")</td>
+                    <td>@($"0x{@hex.DataBytes:X2}")</td>
+                </tr>
+            }
+        @* @foreach (var hex in Model.DataBytes)
+        {
+            <tr>
+               <td>@($"0x{0:X4}")</td>
+                <td>@($"0x{@hex:X4}")</td>
+           </tr>
+        } *@
+    </tbody>
+</table>

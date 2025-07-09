@@ -1,9 +1,23 @@
-﻿namespace HexDiffNew.Models
+﻿using System.Collections.ObjectModel;
+
+namespace HexDiffNew.Models
 {
+
+    public struct HexData
+    {
+        public byte DataBytes { get; set; }
+        public uint Addr { get; set; }
+    }
     public class HexFileModel
     {
-        public string FileName { get; set; }
-        public byte[] DataBytes { get; set; }
+        public required string FileName { get; set; }
+
+        // change in collection of bytes and address for better changebility in controller
+
+        public Collection<HexData>? HexDataCollection { get; set; }
+
+        //public required uint Addr { get; set; }
+        //public required byte[] DataBytes { get; set; }
 
     }
 }

@@ -10,16 +10,16 @@ namespace HexDiffNew.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Compare(IFormFile file1, IFormFile file2)
-        {
-            var hexFile1 = new HexFileModel { FileName = file1.FileName, DataBytes = ReadFile(file1) };
-            var hexFile2 = new HexFileModel { FileName = file2.FileName, DataBytes = ReadFile(file2) };
+        //[HttpPost]
+        //public IActionResult Compare(IFormFile file1, IFormFile file2)
+        //{
+        //    var hexFile1 = new HexFileModel { FileName = file1.FileName, DataBytes = ReadFile(file1) };
+        //    var hexFile2 = new HexFileModel { FileName = file2.FileName, DataBytes = ReadFile(file2) };
 
-            var differences = FindDifferences(hexFile1.DataBytes, hexFile2.DataBytes);
-
-            return View("Results", differences);
-        }
+        //    var differences = FindDifferences(hexFile1.DataBytes, hexFile2.DataBytes);
+            
+        //    return View("Results", differences);
+        //}
 
         private byte[] ReadFile(IFormFile file)
         {
