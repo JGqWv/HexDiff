@@ -17,7 +17,7 @@
         @if (Model.HexDataCollection is not null)
             @foreach (var hex in Model.HexDataCollection)
             {
-                <tr>
+                <tr contenteditable="true">
                     <td>@($"0x{hex.Addr:X4}")</td>
                     <td>@($"0x{@hex.DataBytes:X2}")</td>
                 </tr>
@@ -28,6 +28,7 @@
                <td>@($"0x{0:X4}")</td>
                 <td>@($"0x{@hex:X4}")</td>
            </tr>
-        } *@
+        }
+        *@
     </tbody>
 </table>
