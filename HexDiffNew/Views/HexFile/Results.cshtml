@@ -4,25 +4,36 @@
 @{
 }
 @*Opened file in hex format*@
+
 @model HexFileModel
-<h1>opened hex file</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Addr</th>
-            <th>val</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.HexDataCollection is not null)
-            @foreach (var hex in Model.HexDataCollection)
-            {
-                <tr contenteditable="true">
-                    <td>@($"0x{hex.Addr:X4}")</td>
-                    <td>@($"0x{@hex.DataBytes:X2}")</td>
-                </tr>
-            }
-        @* @foreach (var hex in Model.DataBytes)
+
+
+<form asp-action="Save" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="fileName">Save as:</label>
+        <input type="text" name="fileName" value="@Model.FileName" required> </>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Addr</th>
+                <th>val</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.HexDataCollection is not null)
+                @for (int i = 0; i < Model.HexDataCollection.Count; i++)
+                {
+                    var hex = Model.HexDataCollection[i];
+                    <tr>
+                        <td>@($"0x{hex.Addr:X4}")</td>
+                        <td>
+                            <input type="text" name="HexDataCollection[@i].DataBytes" value="@hex.DataBytes.ToString("X2")" pattern="[0-9A-Fa-f]{2}" title="Enter a valid 2-digit hex value (e.g., FF)" required />
+                            <input type="hidden" name="HexDataCollection[@i].Addr" value="@hex.Addr" />
+                        </td>
+                    </tr>
+                }
+            @* @foreach (var hex in Model.DataBytes)
         {
             <tr>
                <td>@($"0x{0:X4}")</td>
@@ -30,5 +41,8 @@
            </tr>
         }
         *@
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    <button type="submit">Save File</button>
+</form>
+

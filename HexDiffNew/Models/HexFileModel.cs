@@ -3,7 +3,7 @@
 namespace HexDiffNew.Models
 {
 
-    public struct HexData
+    public class HexData    ///< changed to class, cause some stupid model binding cant understand structures
     {
         public byte DataBytes { get; set; }
         public uint Addr { get; set; }

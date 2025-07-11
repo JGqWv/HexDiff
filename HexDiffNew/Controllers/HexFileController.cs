@@ -1,4 +1,5 @@
 ﻿using HexDiffNew.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
 
@@ -22,14 +23,36 @@ namespace HexDiffNew.Controllers
         }
 
         //[HttpPost]
-        //public IActionResult Save(HexDataModel HexFile)
+        //public IActionResult Save()
         //{
+        //    return View();
         //}
+
+        [HttpPost]
+        public IActionResult Save(HexFileModel model )
+        {
+            if(model == null||model.HexDataCollection==null||string.IsNullOrEmpty(model.FileName))
+            {
+                return BadRequest("Invalid data or file name");
+            }
+
+            var bytes = model.HexDataCollection.Select(h=>h.DataBytes).ToArray();
+
+            var fileName = Path.GetFileName(model.FileName);
+            //if(!fileName.EndsWith(".hex", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    fileName += ".hex";
+            //}
+
+            return File(bytes, "application/octet-stream", fileName);
+
+            //return View("Index");
+        }
 
         //[HttpPost]
         //public IActionResult Edit(HexData hexData)
         //{
-           
+
         //}
 
         private Collection<HexData> ReadFileToCollection(IFormFile file)
